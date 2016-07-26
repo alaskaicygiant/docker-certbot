@@ -53,6 +53,6 @@ RUN apt-get update && \
     python3.4-venv      \
     virtualenv      
 
-COPY certbot-auto /bin/certbot-auto
+ADD certbot-auto /bin/certbot-auto
 
 RUN certbot-auto
