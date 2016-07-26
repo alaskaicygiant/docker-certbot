@@ -1,37 +1,58 @@
-FROM alpine:3.3
+FROM python
 
 MAINTAINER Owen Ouyang <owen.ouyang@live.com>
 
-ENV PATH /letsencrypt/venv/bin:$PATH
+RUN 	apt-get update && \
+	apt-get install -y \
+		augeas-lenses \
+		augeas-tools \
+		binfmt-support \
+		dh-python \
+		dialog \
+		libaugeas0 \
+		libexpat1-dev \
+		libmpdec2 \
+		libpython-dev \
+		libpython-stdlib \
+		libpython2.7 \
+		libpython2.7-dev \
+		libpython2.7-minimal \
+		libpython2.7-stdlib \
+		libpython3-stdlib \
+		libpython3.4-minimal \
+		libpython3.4-stdlib \
+		mime-support \
+		python \
+		python-chardet-whl \
+		python-colorama-whl \
+		python-dev \
+		python-distlib-whl \
+		python-distribute \
+		python-html5lib-whl \
+		python-minimal \
+		python-pip-whl \
+		python-pkg-resources \
+		python-requests-whl \
+		python-setuptools-whl \
+		python-six-whl \
+		python-tk \
+		python-urllib3-whl \
+		python-virtualenv \
+		python2.7 \
+		python2.7-dev \
+		python2.7-minimal \
+		python3  \
+		python3-minimal \
+		python3-pkg-resources \
+		python3-setuptools \
+		python3-tk \
+		python3-venv \
+		python3-virtualenv \
+		python3.4 \
+		python3.4-minimal \
+		python3.4-venv \
+		virtualenv 
 
-WORKDIR /letsencrypt
+ADD certbot-auto /bin/certbot-auto  
 
-RUN export BUILD_DEPS="git \
-                build-base \
-                libffi-dev \
-                linux-headers \
-                openssl-dev \
-                py-pip \
-                python-dev" \
-    && apk add -U dialog \
-                python \
-                augeas-libs \
-                ${BUILD_DEPS} \
-    && pip --no-cache-dir install virtualenv \
-    && git clone https://github.com/letsencrypt/letsencrypt /letsencrypt/src \
-    && /letsencrypt/src/letsencrypt-auto-source/letsencrypt-auto --os-packages-only \
-    && virtualenv --no-site-packages -p python2 /letsencrypt/venv \
-    && sed -i '/^BIO \*BIO_new_mem_buf(const void \*buf, int len);/ d' /usr/include/openssl/bio.h \
-    && /letsencrypt/venv/bin/pip install \
-                -e /letsencrypt/src/acme \
-                -e /letsencrypt/src \
-                -e /letsencrypt/src/letsencrypt-apache \
-                -e /letsencrypt/src/letsencrypt-nginx \
-	&& apk del ${BUILD_DEPS} \
-    && rm -rf /var/cache/apk/*
-
-EXPOSE 80 443
-VOLUME /etc/letsencrypt/
-
-
-ENTRYPOINT ["letsencrypt"]
+RUN certbot-auto ; exit 0
