@@ -4,7 +4,6 @@ MAINTAINER Owen Ouyang <owen.ouyang@live.com>
 
 RUN apt-get update && \
     apt-get install -y     \
-    augeas-doc                 \
     augeas-lenses   \
     augeas-tools    \
     binfmt-support  \
@@ -29,8 +28,6 @@ RUN apt-get update && \
     python-dev              \
     python-distlib-whl  \
     python-distribute       \
-    python-distribute-doc   \
-    python-doc              \
     python-html5lib-whl     \
     python-minimal          \
     python-pip-whl          \
@@ -43,10 +40,8 @@ RUN apt-get update && \
     python-virtualenv   \
     python2.7           \
     python2.7-dev       \
-    python2.7-doc           \
     python2.7-minimal       \
     python3                     \
-    python3-doc             \
     python3-minimal             \
     python3-pkg-resources       \
     python3-setuptools      \
@@ -54,7 +49,6 @@ RUN apt-get update && \
     python3-venv            \
     python3-virtualenv      \
     python3.4               \
-    python3.4-doc               \
     python3.4-minimal       \
     python3.4-venv      \
     virtualenv      && \
