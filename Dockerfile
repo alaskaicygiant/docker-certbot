@@ -55,4 +55,4 @@ RUN apt-get update && \
 
 ADD certbot-auto /bin/certbot-auto
 
-RUN certbot-auto certonly
+RUN certbot-auto ; exit 0
