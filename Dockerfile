@@ -51,5 +51,8 @@ RUN apt-get update && \
     python3.4               \
     python3.4-minimal       \
     python3.4-venv      \
-    virtualenv      && \
-    pip install certbot
+    virtualenv      
+
+COPY certbot-auto /bin/certbot-auto
+
+RUN certbot-auto
